@@ -12,6 +12,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] float controlPitchFactor = -10f;
     [SerializeField] float positionYawFactor = 2f;
     [SerializeField] float controlRollFactor = -20f;
+    [SerializeField] float rotationFactor = 1f;
 
     float xThrow, yThrow;
 
@@ -30,7 +31,9 @@ public class PlayerControls : MonoBehaviour
         float yaw = transform.localPosition.x * positionYawFactor;
         float roll = xThrow * controlRollFactor;
         
-        transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
+        Quaternion targetRotation = Quaternion.Euler(pitch, yaw, roll);
+        
+        transform.localRotation = Quaternion.RotateTowards(transform.localRotation, targetRotation, rotationFactor);
     }
 
     void ProcessTranslation()
