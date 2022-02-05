@@ -19,7 +19,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] float rotationFactor = 1f;
 
     [Header("Firing")]
-    
+
     [Tooltip("Lasers particle system game objects")]
     [SerializeField] GameObject[] lasers;
 
@@ -44,7 +44,7 @@ public class PlayerControls : MonoBehaviour
         }
         
     }
-    void ModifyLasers(bool laserState)
+    public void ModifyLasers(bool laserState)
     {
         foreach(GameObject laser in lasers)
         {

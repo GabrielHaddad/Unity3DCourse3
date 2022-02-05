@@ -9,6 +9,13 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] ParticleSystem crashParticles;
     bool isAlive = true;
 
+    PlayerControls player;
+
+    void Awake() 
+    {
+        player = GetComponent<PlayerControls>();
+    }
+
     void OnTriggerEnter(Collider other) 
     {
         if (isAlive)
@@ -24,6 +31,7 @@ public class CollisionHandler : MonoBehaviour
         GetComponent<PlayerControls>().enabled = false;
         crashParticles.Play();
         DisableShipRender();
+        player.ModifyLasers(false);
         StartCoroutine(ReloadLevel());
 
     }
