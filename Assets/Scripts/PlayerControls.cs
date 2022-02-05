@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
+    [Header("Movement Control")]
+
+    [Tooltip("How fast ship moves")] 
     [SerializeField] float controlSpeed = 10f;
     [SerializeField] float xRange = 10f;
     [SerializeField] float yRange = 7f;
 
+    [Header("Ship Rotation")]
     [SerializeField] float positionPitchFactor = -2f;
     [SerializeField] float controlPitchFactor = -10f;
     [SerializeField] float positionYawFactor = 2f;
     [SerializeField] float controlRollFactor = -20f;
     [SerializeField] float rotationFactor = 1f;
+
+    [Header("Firing")]
+    
+    [Tooltip("Lasers particle system game objects")]
+    [SerializeField] GameObject[] lasers;
 
     float xThrow, yThrow;
 
@@ -20,6 +29,28 @@ public class PlayerControls : MonoBehaviour
     {
         ProcessTranslation();
         ProcessRotation();
+        ProcessFiring();
+    }
+
+    void ProcessFiring()
+    {
+        if (Input.GetButton("Fire1"))
+        {
+            ModifyLasers(true);
+        }
+        else
+        {
+            ModifyLasers(false);
+        }
+        
+    }
+    void ModifyLasers(bool laserState)
+    {
+        foreach(GameObject laser in lasers)
+        {
+            var emissionModule = laser.GetComponent<ParticleSystem>().emission;
+            emissionModule.enabled = laserState;
+        }
     }
 
     void ProcessRotation()
