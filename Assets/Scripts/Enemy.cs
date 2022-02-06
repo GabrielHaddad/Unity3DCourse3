@@ -13,10 +13,12 @@ public class Enemy : MonoBehaviour
     Rigidbody rb;
     GameObject parent;
     Score score;
+    AudioPlayer audioPlayer;
 
     void Awake() 
     {
         score = FindObjectOfType<Score>();
+        audioPlayer = FindObjectOfType<AudioPlayer>();
         parent = GameObject.FindWithTag("SpawnAtRuntime");
     }
 
@@ -61,6 +63,7 @@ public class Enemy : MonoBehaviour
 
     void KillEnemy()
     {
+        audioPlayer.PlayExplosionSound();
         InstantiateEffect(explosionParticle);
         Destroy(gameObject);
     }

@@ -22,8 +22,17 @@ public class PlayerControls : MonoBehaviour
 
     [Tooltip("Lasers particle system game objects")]
     [SerializeField] GameObject[] lasers;
+    [SerializeField] float delayLaserSound = 1f;
 
     float xThrow, yThrow;
+    bool canPlayLaser = true;
+
+    AudioPlayer audioPlayer;
+
+    void Awake()
+    {
+        audioPlayer = FindObjectOfType<AudioPlayer>();
+    }
 
     void Update()
     {
@@ -37,13 +46,28 @@ public class PlayerControls : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             ModifyLasers(true);
+
+            if (canPlayLaser)
+            {
+                StartCoroutine(PlayLaserSFX());
+            }
         }
         else
         {
             ModifyLasers(false);
         }
-        
     }
+
+    IEnumerator PlayLaserSFX()
+    {
+        canPlayLaser = false;
+        audioPlayer.PlayLaserSound();
+
+        yield return new WaitForSeconds(delayLaserSound);
+
+        canPlayLaser = true;
+    }
+
     public void ModifyLasers(bool laserState)
     {
         foreach(GameObject laser in lasers)

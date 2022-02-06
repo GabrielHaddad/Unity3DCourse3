@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 2749426798152040619}
   - component: {fileID: 2738979365734392133}
   - component: {fileID: 7515167089077823962}
+  - component: {fileID: -5180119204819818391}
   m_Layer: 7
   m_Name: StarSparrow11
   m_TagString: Untagged
@@ -231,6 +232,19 @@ MonoBehaviour:
   hitParticles: {fileID: 3200836327345539236, guid: ddcf5ef1667ddf04b8dba32097744ae1, type: 3}
   value: 100
   hitPoints: 200
+--- !u!65 &-5180119204819818391
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2762219911803072825}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 11.945584, y: 1.312563, z: 13.117714}
+  m_Center: {x: 0, y: 0.09156953, z: 0}
 --- !u!1 &2762278724862939591
 GameObject:
   m_ObjectHideFlags: 0

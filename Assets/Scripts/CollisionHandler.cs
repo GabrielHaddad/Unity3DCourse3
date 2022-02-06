@@ -10,10 +10,12 @@ public class CollisionHandler : MonoBehaviour
     bool isAlive = true;
 
     PlayerControls player;
+    AudioPlayer audioPlayer;
 
     void Awake() 
     {
         player = GetComponent<PlayerControls>();
+        audioPlayer = FindObjectOfType<AudioPlayer>();
     }
 
     void OnTriggerEnter(Collider other) 
@@ -30,6 +32,7 @@ public class CollisionHandler : MonoBehaviour
         isAlive = false;
         GetComponent<PlayerControls>().enabled = false;
         crashParticles.Play();
+        audioPlayer.PlayExplosionSound();
         DisableShipRender();
         player.ModifyLasers(false);
         StartCoroutine(ReloadLevel());
