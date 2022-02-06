@@ -6,16 +6,23 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] ParticleSystem explosionParticle;
     [SerializeField] ParticleSystem hitParticles;
-    [SerializeField] Transform parent;
     [SerializeField] int value = 20;
     [SerializeField] int hitPoints = 2;
     bool canCollide = true;
 
+    Rigidbody rb;
+    GameObject parent;
     Score score;
 
     void Awake() 
     {
         score = FindObjectOfType<Score>();
+        parent = GameObject.FindWithTag("SpawnAtRuntime");
+    }
+
+    void Start() 
+    {
+        AddRigidbody();
     }
 
     void OnParticleCollision(GameObject other) 
@@ -30,6 +37,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void AddRigidbody()
+    {
+        rb = gameObject.AddComponent<Rigidbody>();
+        rb.useGravity = false;
+    }
+
     void CheckEnemyHealth()
     {
         if (hitPoints <= 0)
@@ -37,14 +50,13 @@ public class Enemy : MonoBehaviour
             score.IncreaseScore(value);
             KillEnemy();
         }
-
-        canCollide = true;
     }
 
     void ProcessHit()
     {
         hitPoints--;
         InstantiateEffect(hitParticles);
+        canCollide = true;
     }
 
     void KillEnemy()
@@ -55,7 +67,7 @@ public class Enemy : MonoBehaviour
 
     void InstantiateEffect(ParticleSystem particleSystem)
     {
-        ParticleSystem instance = Instantiate(particleSystem, transform.position, Quaternion.identity, parent);
+        ParticleSystem instance = Instantiate(particleSystem, transform.position, Quaternion.identity, parent.transform);
                         
         Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
     }
