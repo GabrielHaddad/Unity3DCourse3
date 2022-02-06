@@ -22,7 +22,6 @@ public class Score : MonoBehaviour
     {
         score += increaseAmount;
         scoreText.text = score.ToString("00000000");
-        Debug.Log($"Score: {score}");
     }
     
 }

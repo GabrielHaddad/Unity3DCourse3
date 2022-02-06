@@ -32,7 +32,6 @@ public class Enemy : MonoBehaviour
         if (canCollide)
         {
             canCollide = false;
-            Debug.Log($"{name} -- {other.name}");
             ProcessHit();
             CheckEnemyHealth();            
             

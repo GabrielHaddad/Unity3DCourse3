@@ -22,7 +22,6 @@ public class CollisionHandler : MonoBehaviour
     {
         if (isAlive)
         {
-            Debug.Log("Triggered with: " + other.name);
             StartCrashSequence();
         }
     }
